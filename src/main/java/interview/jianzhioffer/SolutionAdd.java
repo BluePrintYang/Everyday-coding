@@ -8,6 +8,7 @@ public class SolutionAdd {
     public static int Add(int num1, int num2) {
         int and = num1 & num2;
         int xor = num1 ^ num2;
+        //迭代
         while (and != 0) {
             int temp = and << 1;
             and = temp & xor;

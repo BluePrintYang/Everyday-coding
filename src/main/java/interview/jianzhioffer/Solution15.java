@@ -1,5 +1,6 @@
 package interview.jianzhioffer;
 
+
 /**
  * 输入一个链表，反转链表后，输出新链表的表头
  */
@@ -16,6 +17,7 @@ public class Solution15 {
         }
         return pre;
     }
+
 
     public static void main(String[] args) {
         ListNode t = new ListNode(1);

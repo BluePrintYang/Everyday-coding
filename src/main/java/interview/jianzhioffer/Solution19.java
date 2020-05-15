@@ -1,7 +1,5 @@
 package interview.jianzhioffer;
 
-import interview.java基础.lambda.A;
-
 import java.util.ArrayList;
 
 /**

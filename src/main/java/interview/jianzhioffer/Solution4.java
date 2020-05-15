@@ -3,7 +3,9 @@ package interview.jianzhioffer;
 import java.util.Arrays;
 
 
-
+/**
+ * 重建二叉树
+ */
 public class Solution4 {
     public TreeNode reConstructBinaryTree(int [] pre, int [] in) {
         if (pre.length == 0 || in.length == 0) {

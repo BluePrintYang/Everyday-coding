@@ -1,6 +1,6 @@
 package interview;
 
-import interview.java多线程.MyThread;
+import interview.thread.MyThread;
 
 public class Base {
     public static void main(String[] args) {
