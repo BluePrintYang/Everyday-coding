@@ -4,7 +4,7 @@ package jianzhioffer;
  * 不用加减乘除做加法
  * 两数与操作左移一位加两数异或
  */
-public class SolutionAdd {
+public class Solution49Add {
     public static int Add(int num1, int num2) {
         int and = num1 & num2;
         int xor = num1 ^ num2;

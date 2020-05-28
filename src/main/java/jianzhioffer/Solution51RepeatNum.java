@@ -7,7 +7,7 @@ import java.util.Set;
  * 数组中重复的数字
  * 输出是第一个重复的数字
  */
-public class SolutionRepeatNum {
+public class Solution51RepeatNum {
     public boolean duplicate(int[] numbers, int length, int[] duplication) {
         if (length <= 0) {
             duplication[0] = -1;
