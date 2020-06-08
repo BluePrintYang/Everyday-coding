@@ -5,11 +5,19 @@ import java.util.concurrent.*;
 /**
  * 线程池：3大方法、7大参数、4种拒绝策略
  * 好处：1.降低资源消耗  2.提高响应速度  3.方便管理
+ * 拒绝策略：
+ * new ThreadPoolExecutor.AbortPolicy()// 银行满了，还有人进来，不处理这个人的，抛出异常
+ * new ThreadPoolExecutor.CallerRunsPolicy() // 哪来的去哪里！
+ * new ThreadPoolExecutor.DiscardPolicy() //队列满了，丢掉任务，不会抛出异常！
+ * new ThreadPoolExecutor.DiscardOldestPolicy() //队列满了，尝试去和最早的竞争，也不会抛出异常！
  */
 public class ThreadPoolDemo {
     public static void main(String[] args) {
 //        executors();
-        createThreadPool();
+//        createThreadPool();
+        long a = 2147483647;
+        int b = 2147483647;
+
     }
 
     /**
@@ -41,6 +49,11 @@ public class ThreadPoolDemo {
      * 了解：IO密集型，CPU密集型：（调优）
      * IO密集型：判断程序中十分耗IO的线程
      * CPU密集型：几核，就是几，可以保持CPU效率最高
+     *
+     * 最大线程到底该如何定义
+     * 1、CPU 密集型，几核，就是几，可以保持CPU的效率最高！
+     * 2、IO  密集型   > 判断你程序中十分耗IO的线程，
+     * 程序   15个大型任务(2*15个线程)  io十分占用资源！
      */
     public static void createThreadPool() {
         System.out.println("CPU核数："+Runtime.getRuntime().availableProcessors());
@@ -52,7 +65,7 @@ public class ThreadPoolDemo {
                 TimeUnit.SECONDS,//超时单位
                 new LinkedBlockingQueue<>(3),//阻塞队列
                 Executors.defaultThreadFactory(),//线程工厂：创建线程的，一般不用动
-                new ThreadPoolExecutor.DiscardOldestPolicy()//拒绝策略，这里是队列满了，尝试去和最早的竞争，也不会抛出异常！
+                new ThreadPoolExecutor.DiscardPolicy()// 银行满了，还有人进来，不处理这个人的，抛出异常
         );
 
         try {
