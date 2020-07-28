@@ -15,7 +15,7 @@ public class CountDownLatchDemo {
             new Thread(() -> {
                 System.out.println(Thread.currentThread().getName() + " Go Out");
                 c.countDown();
-            }, String.valueOf(i)).start();
+            }, String.valueOf(i+1)).start();
         }
 //        等计数器为0后再执行下面的任务
         c.await();

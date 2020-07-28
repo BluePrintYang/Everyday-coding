@@ -10,8 +10,9 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 public class TestPing {
     public static void main(String[] args) {
-//        Jedis jedis = new Jedis("192.168.132.128",6379);
-        Jedis jedis = new Jedis("127.0.0.1", 6379);
+//        Jedis jedis = new Jedis("192.168.40.128",6379);
+//        Jedis jedis = new Jedis("127.0.0.1", 6379);
+        Jedis jedis = new Jedis("192.168.1.63", 6379);
         System.out.println(jedis.ping());
     }
 }

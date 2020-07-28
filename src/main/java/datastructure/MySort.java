@@ -1,6 +1,9 @@
 package datastructure;
 
+import java.io.*;
+import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Random;
 
 public class MySort {
 
@@ -11,7 +14,7 @@ public class MySort {
      *
      * @param a 待排序数组
      */
-    private static void insertSort(int[] a) {
+    private void insertSort(int[] a) {
         if (a.length == 0) return;
         for (int i = 1; i < a.length; i++) {//要插入的次数为数组长度减一
             int insertNum = a[i];//要插入的数字
@@ -29,7 +32,7 @@ public class MySort {
      *
      * @param a 待排序数组
      */
-    private static void shellSort(int[] a) {
+    private void shellSort(int[] a) {
         if (a.length == 0) return;
         int len = a.length;
         while (len != 0) {
@@ -47,15 +50,34 @@ public class MySort {
         }
     }
 
+    /**
+     * 冒泡排序
+     *
+     * @param a 待排序数组
+     */
+    private void bubbleSort(int[] a) {
+        for (int i = 0; i < a.length - 1; i++) {
+            boolean flag = true;
+            for (int j = 0; j < a.length - 1; j++) {
+                if (a[j] > a[j + 1]) {
+                    int temp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
+                    flag = false;
+                }
+            }
+            if (flag) return;
+        }
+    }
 
     /**
      * 快速排序
      *
-     * @param a    待排序数组
-     * @param firstIndex  数组最左边元素索引
-     * @param lastIndex 数组最右边元素索引
+     * @param a          待排序数组
+     * @param firstIndex 数组最左边元素索引
+     * @param lastIndex  数组最右边元素索引
      */
-    public static void quickSort(int[] a, int firstIndex, int lastIndex) {
+    private void quickSort(int[] a, int firstIndex, int lastIndex) {
         int start = firstIndex;
         int end = lastIndex;
         int key = a[firstIndex];
@@ -88,37 +110,82 @@ public class MySort {
     }
 
 
-
-
-    public static void main(String[] args) {
-        int[] a = {6, 4, 8, 42, 56, 6, 7, 33, 55, 22, 'A', '#', '&', 31, 34, 32, 36, 75, 33, 22, 55, 77, 88, 44, 3, 74, 2,
-                32, 56, 45, 63, 34, 67, 45, 34, 52, 63, 4, 47, 45};
+    public static void main(String[] args) throws IOException {
+        MySort sort = new MySort();
+        int[] a = new int[1000];
+        for (int i = 0; i < 1000; i++) {
+            a[i] = new Random().nextInt();
+        }
         int[] b = a.clone();
         int[] c = a.clone();
+        int[] d = a.clone();
 
-        System.out.println("a数组排序前" + Arrays.toString(a));
+//        System.out.println("a数组排序前" + Arrays.toString(a));
 
+        File insert = new File("insert.txt");
+        sort.writeFile(insert, a, "插入排序前");
+//        FileWriter out = null;
         long startTime = System.currentTimeMillis();
-        insertSort(a);
+        sort.insertSort(a);
         long endTime = System.currentTimeMillis();
+//        out = new FileWriter(insert);
+//        out.write("插入排序前:[");
+//        for (int i = 0; i < a.length; i++) {
+//            if (i == a.length - 1) out.write(a[i]);
+//            out.write(" " + a[i] + ",");
+//        }
+//        out.write("]"+"\n");
+        sort.writeFile(insert, a, "插入排序后");
         System.out.println("插入排序time:" + (endTime - startTime) + "ns");
-        System.out.println("插入排序后" + Arrays.toString(a));
-
+//        System.out.println("插入排序后" + Arrays.toString(a));
+//        out.write("插入排序后:[");
+//        for (int i = 0; i < a.length; i++) {
+//            if (i == a.length - 1) out.write(a[i]);
+//            out.write(" " + a[i] + ",");
+//        }
+//        out.write("]"+"\n");
+        System.out.println();
+/*
         System.out.println("b数组排序前" + Arrays.toString(b));
         startTime = System.currentTimeMillis();
-        shellSort(b);
+        sort.shellSort(b);
         endTime = System.currentTimeMillis();
         System.out.println("希尔排序time:" + (endTime - startTime) + "ns");
         System.out.println("希尔排序后" + Arrays.toString(b));
+        System.out.println();
 
-        System.out.println("c数组排序前" + Arrays.toString(c));
+//        System.out.println("c数组排序前" + Arrays.toString(c));
+//        startTime = System.currentTimeMillis();
+//        sort.quickSort(c, 0, c.length - 1);
+//        sort.quickSort(c, 0, c.length - 1);
+//        endTime = System.currentTimeMillis();
+//        System.out.println("快速排序time:" + (endTime - startTime) + "ns");
+//        System.out.println("快速排序后" + Arrays.toString(b));
+//        System.out.println();
+
+*/
+//        System.out.println("d数组排序前" + Arrays.toString(d));
         startTime = System.currentTimeMillis();
-        quickSort(c, 0, c.length - 1);
-        quickSort(c, 0, c.length - 1);
+        sort.writeFile(new File("bubble.txt"),d,"冒泡排序前");
+        sort.bubbleSort(d);
         endTime = System.currentTimeMillis();
-        System.out.println("快速排序排序time:" + (endTime - startTime) + "ns");
-        System.out.println("快速排序后" + Arrays.toString(b));
+        sort.writeFile(new File("bubble.txt"),d,"冒泡排序后");
+        System.out.println("冒泡排序time:" + (endTime - startTime) + "ns");
+//        System.out.println("冒泡排序后" + Arrays.toString(d));
+        /*
+
+ */
     }
 
+    void writeFile(File file, int[] array, String str) throws IOException {
+        File f = file;
+        FileWriter out = null;
+        out = new FileWriter(f);
+        out.write(str + ":");
+        for (int i = 0; i < array.length; i++) {
+            out.write(array[i]+"\t");
+        }
+        out.write("\t\n");
+    }
 
 }

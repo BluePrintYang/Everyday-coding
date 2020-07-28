@@ -8,7 +8,7 @@ public class TestForReflection {
 
     @Override
     public String toString() {
-        return "Test{" +
+        return "interview.Test{" +
                 "var=" + var +
                 '}';
     }

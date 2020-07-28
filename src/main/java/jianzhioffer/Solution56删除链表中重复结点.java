@@ -13,32 +13,32 @@ public class Solution56删除链表中重复结点 {
         ListNode cur = new ListNode(0);
         ListNode pre = cur;
 
-        //头结点的val值
+        //当前结点的val值
         int val = pHead.val;
 
         //遍历链表
-        while (pHead.next != null) {
+        while (true) {
 
-            //后面结点为空，直接跳出循环
+            //后面结点为空，添加当前节点，跳出循环
+            if (pHead.next == null) {
+                cur.next = new ListNode(pHead.val);
+                break;
+            }
 
-            //下一个结点与当前结点val值相同，跳到下一个不同的结点
+            //下一个结点与当前结点val值相同，跳到下一个值不同的结点
             if (pHead.next.val == val) {
-                pHead = pHead.next.next;
-                if (pHead == null) break;
                 while (pHead.val == val) {
                     pHead = pHead.next;
                     if (pHead == null) break;
                 }
-                //当前结点已经为空，跳出循环
-                if (pHead == null) break;
-                //不为空，设置新val值
-            }
-            //否则添加当前结点到cur
-            else {
+            } else {//否则添加当前结点到cur
                 cur.next = new ListNode(pHead.val);
                 cur = cur.next;
                 pHead = pHead.next;
             }
+
+            if (pHead == null) break;
+            //设置新val值
             val = pHead.val;
 
         }
@@ -53,7 +53,11 @@ public class Solution56删除链表中重复结点 {
         node.next.next.next.next = new ListNode(1);
         node.next.next.next.next.next = new ListNode(1);
         node.next.next.next.next.next.next = new ListNode(1);
+
         System.out.println(node.toString());
-        System.out.println(deleteDuplication(node).toString());
+//        ListNode delNode = deleteDuplication(node);
+//        if (delNode != null)
+//            System.out.println(delNode.toString());
+//        else System.out.println("null");
     }
 }
